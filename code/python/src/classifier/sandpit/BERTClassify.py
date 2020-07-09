@@ -9,12 +9,9 @@ from torch.utils.data import TensorDataset, random_split
 
 # If there's a GPU available...
 if torch.cuda.is_available():
-
     # Tell PyTorch to use the GPU.
     device = torch.device("cuda")
-
     print('There are %d GPU(s) available.' % torch.cuda.device_count())
-
     print('We will use the GPU:', torch.cuda.get_device_name(0))
 
 # If not...
@@ -37,13 +34,13 @@ df.sample(10)
 
 
 # Get the lists of sentences and their labels.
-sentences = df.sentence.values #todo:feature fields must be merged here, urls must be preprocessed here
+sentences = df.sentence.values
 labels = df.label.values
 
 # Load the BERT tokenizer.
 print('Loading BERT tokenizer...')
-#tokenizer = BertTokenizer.from_pretrained('classifier-base-uncased', do_lower_case=True)
-tokenizer = BertTokenizer.from_pretrained('/home/zz/Work/data/BERT/lm_finetune', do_lower_case=True)
+tokenizer = BertTokenizer.from_pretrained('classifier-base-uncased', do_lower_case=True)
+#tokenizer = BertTokenizer.from_pretrained('/home/zz/Work/data/BERT/lm_finetune', do_lower_case=True)
 
 # Print the original sentence.
 print(' Original: ', sentences[0])
@@ -149,8 +146,8 @@ from transformers import BertForSequenceClassification, AdamW, BertConfig
 # Load BertForSequenceClassification, the pretrained BERT model with a single
 # linear classification layer on top.
 model = BertForSequenceClassification.from_pretrained(
-    #"classifier-base-uncased", # Use the 12-layer BERT model, with an uncased vocab.
-    "/home/zz/Work/data/BERT/lm_finetune",
+    "classifier-base-uncased", # Use the 12-layer BERT model, with an uncased vocab.
+    #"/home/zz/Work/data/BERT/lm_finetune",
     num_labels = 2, # The number of output labels--2 for binary classification.
                     # You can increase this for multi-class tasks.
     output_attentions = False, # Whether the model returns attentions weights.

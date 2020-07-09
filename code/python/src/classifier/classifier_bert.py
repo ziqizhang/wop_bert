@@ -4,206 +4,22 @@ Colab at: https://colab.research.google.com/drive/1CfoY7d041kRhyrYq49Mtivn11SFvR
 from exp import exp_util
 from transformers import BertTokenizer
 import torch
-import pandas as pd
-from torch.utils.data import TensorDataset, Subset
+from torch.utils.data import TensorDataset, random_split
 from sklearn import preprocessing
-from classifier import classifier_util as cu
-
-# If there's a GPU available...
-if torch.cuda.is_available():
-
-    # Tell PyTorch to use the GPU.
-    device = torch.device("cuda")
-
-    print('There are %d GPU(s) available.' % torch.cuda.device_count())
-
-    print('We will use the GPU:', torch.cuda.get_device_name(0))
-
-# If not...
-else:
-    print('No GPU available, using the CPU instead.')
-    device = torch.device("cpu")
-
-
-# Load the dataset into a pandas dataframe.
-df_all, train_size, test_size = exp_util.load_and_merge_train_test_data_jsonMPWD(
-    "/home/zz/Cloud/GDrive/ziqizhang/project/mwpd/prodcls/data/swc2020/small_train.json",
-    "/home/zz/Cloud/GDrive/ziqizhang/project/mwpd/prodcls/data/swc2020/small_train.json")
-
-
-# Get the lists of sentences and their labels.
-X_sentences = df_all[:, 1]
-y_labels = df_all[:, 5]
-
-# Load the BERT tokenizer.
-print('Loading BERT tokenizer...')
-#tokenizer = BertTokenizer.from_pretrained('classifier-base-uncased', do_lower_case=True)
-tokenizer = BertTokenizer.from_pretrained('/home/zz/Work/data/BERT/lm_finetune', do_lower_case=True)
-
-# Print the original sentence.
-print(' Original: ', X_sentences[0])
-
-# Print the sentence split into tokens.
-print('Tokenized: ', tokenizer.tokenize(X_sentences[0]))
-
-# Print the sentence mapped to token ids.
-print('Token IDs: ', tokenizer.convert_tokens_to_ids(tokenizer.tokenize(X_sentences[0])))
-
-max_len = 0
-
-# For every sentence...
-for sent in X_sentences:
-
-    # Tokenize the text and add `[CLS]` and `[SEP]` tokens.
-    input_ids = tokenizer.encode(sent, add_special_tokens=True)
-
-    # Update the maximum sentence length.
-    max_len = max(max_len, len(input_ids))
-
-print('Max sentence length: ', max_len)
-
-# Tokenize all of the sentences and map the tokens to thier word IDs.
-input_ids = []
-attention_masks = []
-
-# For every sentence...
-for sent in X_sentences:
-    # `encode_plus` will:
-    #   (1) Tokenize the sentence.
-    #   (2) Prepend the `[CLS]` token to the start.
-    #   (3) Append the `[SEP]` token to the end.
-    #   (4) Map tokens to their IDs.
-    #   (5) Pad or truncate the sentence to `max_length`
-    #   (6) Create attention masks for [PAD] tokens.
-    encoded_dict = tokenizer.encode_plus(
-        sent,  # Sentence to encode.
-        add_special_tokens=True,  # Add '[CLS]' and '[SEP]'
-        max_length=64,  # Pad & truncate all sentences.
-        pad_to_max_length=True,
-        return_attention_mask=True,  # Construct attn. masks.
-        return_tensors='pt',  # Return pytorch tensors.
-    )
-
-    # Add the encoded sentence to the list.
-    input_ids.append(encoded_dict['input_ids'])
-
-    # And its attention mask (simply differentiates padding from non-padding).
-    attention_masks.append(encoded_dict['attention_mask'])
-
-# Convert the lists into tensors.
-input_ids = torch.cat(input_ids, dim=0)
-attention_masks = torch.cat(attention_masks, dim=0)
-
-le = preprocessing.LabelEncoder()
-le.fit(y_labels)
-y_labels=le.transform(y_labels)
-
-y_labels = torch.tensor(y_labels)
-
-
-
-# Print sentence 0, now as a list of IDs.
-print('Original: ', X_sentences[0])
-print('Token IDs:', input_ids[0])
-
-
-
-# Combine the training inputs into a TensorDataset.
-
-# Combine the training inputs into a TensorDataset.
-dataset = TensorDataset(input_ids, attention_masks, y_labels)
-
-indices = list(range(len(dataset)))
-
-train_dataset = Subset(dataset, indices[:train_size])
-val_dataset = Subset(dataset, indices[train_size:])
-
-#
-# if sum(lengths) != len(dataset):
-#     raise ValueError("Sum of input lengths does not equal the length of the input dataset!")
-#
-# indices = randperm(sum(lengths)).tolist()
-# return [Subset(dataset, indices[offset - length:offset]) for offset, length in zip(_accumulate(lengths), lengths)]
-
-
-
-print('{:>5,} training samples'.format(len(train_dataset)))
-print('{:>5,} validation samples'.format(len(val_dataset)))
-
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
-
-# The DataLoader needs to know our batch size for training, so we specify it
-# here. For fine-tuning BERT on a specific task, the authors recommend a batch
-# size of 16 or 32.
-batch_size = 32
-
-# Create the DataLoaders for our training and validation sets.
-# We'll take training samples in random order.
-train_dataloader = DataLoader(
-            train_dataset,  # The training samples.
-            sampler = RandomSampler(train_dataset), # Select batches randomly
-            batch_size = batch_size # Trains with this batch size.
-        )
-
-# For validation the order doesn't matter, so we'll just read them sequentially.
-validation_dataloader = DataLoader(
-            val_dataset, # The validation samples.
-            sampler = SequentialSampler(val_dataset), # Pull out batches sequentially.
-            batch_size = batch_size # Evaluate with this batch size.
-        )
-
-from transformers import BertForSequenceClassification, AdamW, BertConfig
-
-# Load BertForSequenceClassification, the pretrained BERT model with a single
-# linear classification layer on top.
-model = BertForSequenceClassification.from_pretrained(
-    #"classifier-base-uncased", # Use the 12-layer BERT model, with an uncased vocab.
-    "/home/zz/Work/data/BERT/lm_finetune",
-    num_labels =len(le.classes_), # The number of output labels--2 for binary classification.
-                    # You can increase this for multi-class tasks.
-    output_attentions = False, # Whether the model returns attentions weights.
-    output_hidden_states = False, # Whether the model returns all hidden-states.
-)
-
-# Tell pytorch to run this model on the GPU.
-#model.cuda()
-
-# Note: AdamW is a class from the huggingface library (as opposed to pytorch)
-# I believe the 'W' stands for 'Weight Decay fix"
-optimizer = AdamW(model.parameters(),
-                  lr = 2e-5, # args.learning_rate - default is 5e-5, our notebook had 2e-5
-                  eps = 1e-8 # args.adam_epsilon  - default is 1e-8.
-                )
-
+from transformers import BertForSequenceClassification, AdamW
 from transformers import get_linear_schedule_with_warmup
-
-# Number of training epochs. The BERT authors recommend between 2 and 4.
-# We chose to run for 4, but we'll see later that this may be over-fitting the
-# training data.
-epochs = 4
-
-# Total number of training steps is [number of batches] x [number of epochs].
-# (Note that this is not the same as the number of training samples).
-total_steps = len(train_dataloader) * epochs
-
-# Create the learning rate scheduler.
-scheduler = get_linear_schedule_with_warmup(optimizer,
-                                            num_warmup_steps = 0, # Default value in run_glue.py
-                                            num_training_steps = total_steps)
-
 import numpy as np
-
-# Function to calculate the accuracy of our predictions vs labels
-def flat_accuracy(preds, labels, model_name, task_name, model_descriptor, outfolder):
-    pred_flat = np.argmax(preds, axis=1).flatten()
-    labels_flat = labels.flatten()
-    cu.save_scores(pred_flat, labels_flat, model_name, task_name, model_descriptor, 3,
-                     outfolder)
-    return np.sum(pred_flat == labels_flat) / len(labels_flat)
-
-
 import time
 import datetime
+import random
+import pandas as pd
+from sklearn.metrics import matthews_corrcoef
+
+seed_val = 42
+random.seed(seed_val)
+np.random.seed(seed_val)
+torch.manual_seed(seed_val)
 
 
 def format_time(elapsed):
@@ -217,25 +33,159 @@ def format_time(elapsed):
     return str(datetime.timedelta(seconds=elapsed_rounded))
 
 
+# Function to calculate the accuracy of our predictions vs labels
+def flat_accuracy(preds, labels):
+    pred_flat = np.argmax(preds, axis=1).flatten()
+    labels_flat = labels.flatten()
+    # cu.save_scores(pred_flat, labels_flat, model_name, task_name, model_descriptor, 3,
+    #                  outfolder)
+    return np.sum(pred_flat == labels_flat) / len(labels_flat)
 
 
-model_name="-bert-"
-task_name="-mwpd-"
-identifier="-wiki103_lmft-"
-outfolder="/home/zz/Cloud/GDrive/ziqizhang/project/mwpd/prodcls/data/swc2020"
-###################### TRAINING
-import random
+# If there's a GPU available...
+use_gpu = False
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+    use_gpu = True
+    print('There are %d GPU(s) available.' % torch.cuda.device_count())
+    print('We will use the GPU:', torch.cuda.get_device_name(0))
+# If not...
+else:
+    print('No GPU available, using the CPU instead.')
+    device = torch.device("cpu")
 
-# This training code is based on the `run_glue.py` script here:
-# https://github.com/huggingface/transformers/blob/5bfcd0485ece086ebcbed2d008813037968a9e58/examples/run_glue.py#L128
+param_sentence_length = 64
+param_sentence_field = 1
+param_label_field = 5
+param_batch_size = 32
+param_training_epoch = 2
+model_name = "-bert-"
+task_name = "-mwpd-"
+identifier = "-wiki103_lmft-"
+outfolder = "/home/zz/Cloud/GDrive/ziqizhang/project/mwpd/prodcls/data/swc2020"
 
-# Set the seed value all over the place to make this reproducible.
-seed_val = 42
+# Load the dataset into a pandas dataframe.
+df_all, train_size, test_size = exp_util.load_and_merge_train_test_data_jsonMPWD(
+    # "/home/zz/Cloud/GDrive/ziqizhang/project/mwpd/prodcls/data/swc2020/small_train.json",
+    # "/home/zz/Cloud/GDrive/ziqizhang/project/mwpd/prodcls/data/swc2020/small_train.json")
+    "/home/zz/Cloud/GDrive/ziqizhang/project/mwpd/prodcls/data/swc2020/train.json",
+    "/home/zz/Cloud/GDrive/ziqizhang/project/mwpd/prodcls/data/swc2020/test.json")
+# encode labels to numbers
+labels_all = df_all[:, param_label_field]
+le = preprocessing.LabelEncoder()
+le.fit(labels_all)
 
-random.seed(seed_val)
-np.random.seed(seed_val)
-torch.manual_seed(seed_val)
-#torch.cuda.manual_seed_all(seed_val)
+df_train = df_all[0:train_size]
+df_test = df_all[train_size:]
+
+###################################
+#            training             #
+###################################
+
+# Get the lists of sentences and their labels.
+X_train_sentences = df_train[:, param_sentence_field]
+y_train_labels = df_train[:, param_label_field]
+
+# Load the BERT tokenizer.
+print('Loading BERT tokenizer...')
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
+#tokenizer = BertTokenizer.from_pretrained('/home/zz/Work/data/BERT/lm_finetune', do_lower_case=True)
+
+max_len = 0
+for sent in X_train_sentences:
+    input_ids = tokenizer.encode(sent, add_special_tokens=True)
+    max_len = max(max_len, len(input_ids))
+print('Max sentence length: ', max_len)
+
+# Tokenize all of the sentences and map the tokens to thier word IDs.
+input_ids = []
+attention_masks = []
+
+# For every sentence...
+for sent in X_train_sentences:
+    # `encode_plus` will:
+    #   (1) Tokenize the sentence.
+    #   (2) Prepend the `[CLS]` token to the start.
+    #   (3) Append the `[SEP]` token to the end.
+    #   (4) Map tokens to their IDs.
+    #   (5) Pad or truncate the sentence to `max_length`
+    #   (6) Create attention masks for [PAD] tokens.
+    encoded_dict = tokenizer.encode_plus(
+        sent,  # Sentence to encode.
+        add_special_tokens=True,  # Add '[CLS]' and '[SEP]'
+        max_length=param_sentence_length,  # Pad & truncate all sentences.
+        pad_to_max_length=True,
+        return_attention_mask=True,  # Construct attn. masks.
+        return_tensors='pt',  # Return pytorch tensors.
+    )
+
+    input_ids.append(encoded_dict['input_ids'])
+    attention_masks.append(encoded_dict['attention_mask'])
+
+# Convert the lists into tensors.
+input_ids = torch.cat(input_ids, dim=0)
+attention_masks = torch.cat(attention_masks, dim=0)
+
+y_train_labels = le.transform(y_train_labels)
+y_train_labels = torch.tensor(y_train_labels)
+
+# Combine the training inputs into a TensorDataset.
+dataset = TensorDataset(input_ids, attention_masks, y_train_labels)
+
+# Create a 90-10 train-validation split.
+train_size = int(0.9 * len(dataset))
+val_size = len(dataset) - train_size
+
+# Divide the dataset by randomly selecting samples.
+train_dataset, val_dataset = random_split(dataset, [train_size, val_size])
+
+print('{:>5,} training samples'.format(train_size))
+print('{:>5,} validation samples'.format(val_size))
+
+# Create the DataLoaders for our training and validation sets.
+# We'll take training samples in random order.
+train_dataloader = DataLoader(
+    train_dataset,  # The training samples.
+    sampler=RandomSampler(train_dataset),  # Select batches randomly
+    batch_size=param_batch_size  # Trains with this batch size.
+)
+
+# For validation the order doesn't matter, so we'll just read them sequentially.
+validation_dataloader = DataLoader(
+    val_dataset,  # The validation samples.
+    sampler=SequentialSampler(val_dataset),  # Pull out batches sequentially.
+    batch_size=param_batch_size  # Evaluate with this batch size.
+)
+
+# Load BertForSequenceClassification, the pretrained BERT model with a single
+# linear classification layer on top.
+model = BertForSequenceClassification.from_pretrained(
+    "bert-base-uncased", # Use the 12-layer BERT model, with an uncased vocab.
+    #"/home/zz/Work/data/BERT/lm_finetune",
+    num_labels=len(le.classes_),  # The number of output labels.
+    output_attentions=False,  # Whether the model returns attentions weights.
+    output_hidden_states=False,  # Whether the model returns all hidden-states.
+)
+
+# Tell pytorch to run this model on the GPU.
+if use_gpu:
+    model.cuda()
+
+# Note: AdamW is a class from the huggingface library (as opposed to pytorch)
+# I believe the 'W' stands for 'Weight Decay fix"
+optimizer = AdamW(model.parameters(),
+                  lr=2e-5,  # args.learning_rate - default is 5e-5, our notebook had 2e-5
+                  eps=1e-8  # args.adam_epsilon  - default is 1e-8.
+                  )
+
+# Total number of training steps is [number of batches] x [number of epochs].
+# (Note that this is not the same as the number of training samples).
+total_steps = len(train_dataloader) * param_training_epoch
+
+# Create the learning rate scheduler.
+scheduler = get_linear_schedule_with_warmup(optimizer,
+                                            num_warmup_steps=0,  # Default value in run_glue.py
+                                            num_training_steps=total_steps)
 
 # We'll store a number of quantities such as training and validation loss,
 # validation accuracy, and timings.
@@ -245,7 +195,7 @@ training_stats = []
 total_t0 = time.time()
 
 # For each epoch...
-for epoch_i in range(0, epochs):
+for epoch_i in range(0, param_training_epoch):
 
     # ========================================
     #               Training
@@ -254,29 +204,22 @@ for epoch_i in range(0, epochs):
     # Perform one full pass over the training set.
 
     print("")
-    print('======== Epoch {:} / {:} ========'.format(epoch_i + 1, epochs))
+    print('======== Epoch {:} / {:} ========'.format(epoch_i + 1, param_training_epoch))
     print('Training...')
 
     # Measure how long the training epoch takes.
     t0 = time.time()
-
     # Reset the total loss for this epoch.
     total_train_loss = 0
-
-    # Put the model into training mode. Don't be mislead--the call to
-    # `train` just changes the *mode*, it doesn't *perform* the training.
-    # `dropout` and `batchnorm` layers behave differently during training
-    # vs. test (source: https://stackoverflow.com/questions/51433378/what-does-model-train-do-in-pytorch)
+    # Put the model into training mode.
     model.train()
 
     # For each batch of training data...
     for step, batch in enumerate(train_dataloader):
-
         # Progress update every 40 batches.
         if step % 40 == 0 and not step == 0:
             # Calculate elapsed time in minutes.
             elapsed = format_time(time.time() - t0)
-
             # Report progress.
             print('  Batch {:>5,}  of  {:>5,}.    Elapsed: {:}.'.format(step, len(train_dataloader), elapsed))
 
@@ -401,8 +344,7 @@ for epoch_i in range(0, epochs):
 
         # Calculate the accuracy for this batch of test sentences, and
         # accumulate it over all batches.
-        # todo: do not calculate prf for each batch, collect results, and calculate that for this validation run
-        total_eval_accuracy += flat_accuracy(logits, label_ids,model_name, task_name, identifier,outfolder)
+        total_eval_accuracy += flat_accuracy(logits, label_ids)
 
     # Report the final accuracy for this validation run.
     avg_val_accuracy = total_eval_accuracy / len(validation_dataloader)
@@ -434,19 +376,115 @@ print("Training complete!")
 
 print("Total training took {:} (h:mm:ss)".format(format_time(time.time() - total_t0)))
 
-import pandas as pd
-
 # Display floats with two decimal places.
 pd.set_option('precision', 2)
-
 # Create a DataFrame from our training statistics.
 df_stats = pd.DataFrame(data=training_stats)
-
 # Use the 'epoch' as the row index.
 df_stats = df_stats.set_index('epoch')
-
-# A hack to force the column headers to wrap.
-#df = df.style.set_table_styles([dict(selector="th",props=[('max-width', '70px')])])
-
 # Display the table.
-df_stats
+print(df_stats)
+
+##################################
+#             TEST               #
+##################################
+
+# Load the dataset into a pandas dataframe.
+
+
+# Report the number of sentences.
+print('Number of test sentences: {:,}\n'.format(df_test.shape[0]))
+
+# Create sentence and label lists
+X_test_sentences = df_test[:, param_sentence_field]
+y_test_labels = df_test[:, param_label_field]
+y_test_labels = le.transform(y_test_labels)
+
+# Tokenize all of the sentences and map the tokens to thier word IDs.
+input_ids = []
+attention_masks = []
+
+# For every sentence...
+for sent in X_test_sentences:
+    # `encode_plus` will:
+    #   (1) Tokenize the sentence.
+    #   (2) Prepend the `[CLS]` token to the start.
+    #   (3) Append the `[SEP]` token to the end.
+    #   (4) Map tokens to their IDs.
+    #   (5) Pad or truncate the sentence to `max_length`
+    #   (6) Create attention masks for [PAD] tokens.
+    encoded_dict = tokenizer.encode_plus(
+        sent,  # Sentence to encode.
+        add_special_tokens=True,  # Add '[CLS]' and '[SEP]'
+        max_length=param_sentence_length,  # Pad & truncate all sentences.
+        pad_to_max_length=True,
+        return_attention_mask=True,  # Construct attn. masks.
+        return_tensors='pt',  # Return pytorch tensors.
+    )
+
+    # Add the encoded sentence to the list.
+    input_ids.append(encoded_dict['input_ids'])
+
+    # And its attention mask (simply differentiates padding from non-padding).
+    attention_masks.append(encoded_dict['attention_mask'])
+
+# Convert the lists into tensors.
+input_ids = torch.cat(input_ids, dim=0)
+attention_masks = torch.cat(attention_masks, dim=0)
+labels = torch.tensor(y_test_labels)
+
+# Create the DataLoader.
+prediction_data = TensorDataset(input_ids, attention_masks, labels)
+prediction_sampler = SequentialSampler(prediction_data)
+prediction_dataloader = DataLoader(prediction_data, sampler=prediction_sampler, batch_size=param_batch_size)
+
+# Prediction on test set
+print('Predicting labels for {:,} test sentences...'.format(len(input_ids)))
+# Put model in evaluation mode
+model.eval()
+
+# Tracking variables
+predictions, true_labels = [], []
+
+# Predict
+for batch in prediction_dataloader:
+    # Add batch to GPU
+    batch = tuple(t.to(device) for t in batch)
+
+    # Unpack the inputs from our dataloader
+    b_input_ids, b_input_mask, b_labels = batch
+
+    # Telling the model not to compute or store gradients, saving memory and
+    # speeding up prediction
+    with torch.no_grad():
+        # Forward pass, calculate logit predictions
+        outputs = model(b_input_ids, token_type_ids=None,
+                        attention_mask=b_input_mask)
+
+    logits = outputs[0]
+
+    # Move logits and labels to CPU
+    logits = logits.detach().cpu().numpy()
+    label_ids = b_labels.to('cpu').numpy()
+
+    # Store predictions and true labels
+    predictions.append(logits)
+    true_labels.append(label_ids)
+
+print('    DONE.')
+
+################################
+#          Output              #
+################################
+
+# Combine the results across all batches.
+flat_predictions = np.concatenate(predictions, axis=0)
+# For each sample, pick the label (0 or 1) with the higher score.
+flat_predictions = np.argmax(flat_predictions, axis=1).flatten()
+# Combine the correct labels for each batch into a single list.
+flat_true_labels = np.concatenate(true_labels, axis=0)
+
+# Calculate the MCC
+mcc = matthews_corrcoef(flat_true_labels, flat_predictions)
+
+print('Total MCC: %.3f' % mcc)

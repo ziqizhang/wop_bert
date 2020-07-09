@@ -39,7 +39,7 @@ labels = df.label.values
 
 # Load the BERT tokenizer.
 print('Loading BERT tokenizer...')
-tokenizer = BertTokenizer.from_pretrained('classifier-base-uncased', do_lower_case=True)
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
 #tokenizer = BertTokenizer.from_pretrained('/home/zz/Work/data/BERT/lm_finetune', do_lower_case=True)
 
 # Print the original sentence.
@@ -146,7 +146,7 @@ from transformers import BertForSequenceClassification, AdamW, BertConfig
 # Load BertForSequenceClassification, the pretrained BERT model with a single
 # linear classification layer on top.
 model = BertForSequenceClassification.from_pretrained(
-    "classifier-base-uncased", # Use the 12-layer BERT model, with an uncased vocab.
+    "bert-base-uncased", # Use the 12-layer BERT model, with an uncased vocab.
     #"/home/zz/Work/data/BERT/lm_finetune",
     num_labels = 2, # The number of output labels--2 for binary classification.
                     # You can increase this for multi-class tasks.
@@ -169,7 +169,7 @@ from transformers import get_linear_schedule_with_warmup
 # Number of training epochs. The BERT authors recommend between 2 and 4.
 # We chose to run for 4, but we'll see later that this may be over-fitting the
 # training data.
-epochs = 4
+epochs = 2
 
 # Total number of training steps is [number of batches] x [number of epochs].
 # (Note that this is not the same as the number of training samples).

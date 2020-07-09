@@ -1,6 +1,9 @@
 '''
 Colab at: https://colab.research.google.com/drive/1CfoY7d041kRhyrYq49Mtivn11SFvR4P1#scrollTo=oYsV4H8fCpZ-
 '''
+import logging
+
+logging.basicConfig(level=logging.ERROR)
 from exp import exp_util
 from transformers import BertTokenizer
 import torch

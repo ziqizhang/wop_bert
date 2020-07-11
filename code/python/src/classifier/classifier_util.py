@@ -46,12 +46,12 @@ def prepare_score_string(p, r, f1, s, labels, target_names, digits):
     string += '{0}'.format(np.sum(s))
     return string
 
-def save_scores(predictions, gs, model_name, task_name,
-                identifier, digits, outfolder):
-    outputPredictions(predictions, gs, model_name, task_name, outfolder)
-    filename = os.path.join(outfolder, "%s-%s.csv" % (model_name, task_name))
+def save_scores(predictions, gs, model_name, target_and_feature,
+                algorithm_param_identifier, digits, outfolder):
+    outputPredictions(predictions, gs, model_name, target_and_feature, outfolder)
+    filename = os.path.join(outfolder, "%s-%s.csv" % (model_name, target_and_feature))
     file = open(filename, "a+")
-    file.write(identifier)
+    file.write(algorithm_param_identifier)
 
     file.write("N-fold results:\n")
     labels = unique_labels(gs, predictions)

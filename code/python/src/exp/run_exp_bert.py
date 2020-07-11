@@ -2,6 +2,8 @@ from exp import exp_util
 import sys
 import torch
 from classifier import classifier_bert_
+from wordsegment import load
+load()
 
 if __name__ == "__main__":
     # argv-1: folder containing all settings to run, see 'input' folder
@@ -66,18 +68,6 @@ if __name__ == "__main__":
     setting_file = sys.argv[4]
     bert_model = sys.argv[6]
 
-    # If there's a GPU available...
-    use_gpu = False
-    if torch.cuda.is_available():
-        device = torch.device("cuda")
-        use_gpu = True
-        print('There are %d GPU(s) available.' % torch.cuda.device_count())
-        print('We will use the GPU:', torch.cuda.get_device_name(0))
-    # If not...
-    else:
-        print('No GPU available, using the CPU instead.')
-        device = torch.device("cpu")
-
     properties = exp_util.load_properties(setting_file)
 
     df_all, train_size, test_size = exp_util.load_and_merge_train_test_data_jsonMPWD(
@@ -94,7 +84,12 @@ if __name__ == "__main__":
                                                  overwrite_params))
     param_epoch = int(exp_util.load_setting("param_training_epoch", properties,
                                             overwrite_params))
-    task = "bert_" + setting_file[setting_file.index("/") + 1]
+
+    if bert_model.startswith("/"):
+        bert_model=bert_model[bert_model.rfind("/")+1:]
+    model_name = bert_model
+
+    target_and_feature=setting_file[setting_file.rfind("/") + 1:]
     input_text_fields = []
     count = 0
     for x in exp_util.load_setting("text_fieldnames", properties, overwrite_params).split("|"):
@@ -108,6 +103,7 @@ if __name__ == "__main__":
                                       param_epoch,
                                       bert_model,
                                       outfolder,
-                                      task,
+                                      model_name,
+                                      target_and_feature,
                                       1,
                                       input_text_fields)

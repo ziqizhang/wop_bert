@@ -20,6 +20,8 @@ import random
 import pandas as pd
 from sklearn.metrics import matthews_corrcoef
 import sys
+from util import nlp
+from classifier import classifier_util as cutil
 
 seed_val = 42
 random.seed(seed_val)
@@ -46,6 +48,20 @@ def flat_accuracy(preds, labels):
     #                  outfolder)
     return np.sum(pred_flat == labels_flat) / len(labels_flat)
 
+def concat_text_input_fields(df:pd.DataFrame, text_input_fields: list,
+                             text_norm_option: int):
+    sentences=[]
+    for row in df:
+        text = ""
+        for b in range(len(text_input_fields)):
+            text_col = text_input_fields[b]
+            t = row[text_col]
+            if t.startswith("http") and " " not in t:
+                t = nlp.url_to_words(t)
+            text += t+" "
+        sentences.append(text)
+    return sentences
+
 
 def fit_bert_holdout(df_all: pd.DataFrame, split_at_row: int,
                      param_label_field: int,
@@ -54,9 +70,22 @@ def fit_bert_holdout(df_all: pd.DataFrame, split_at_row: int,
                      param_training_epoch:int,
                      bert_model: str,  # either a name identifying the pre-trained model, or path
                      outfolder: str,
-                     task: str,
+                     model_name: str, #bert_uncased, or bert_customised, etc
+                     target_and_feature:str, #classification lvl or target, and text input fields
                      text_norm_option: int,
                      text_input_fields: list):
+    # If there's a GPU available...
+    use_gpu = False
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+        use_gpu = True
+        print('There are %d GPU(s) available.' % torch.cuda.device_count())
+        print('We will use the GPU:', torch.cuda.get_device_name(0))
+    # If not...
+    else:
+        print('No GPU available, using the CPU instead.')
+        device = torch.device("cpu")
+
     labels_all = df_all[:, param_label_field]
     le = preprocessing.LabelEncoder()
     le.fit(labels_all)
@@ -69,7 +98,7 @@ def fit_bert_holdout(df_all: pd.DataFrame, split_at_row: int,
     ###################################
 
     # Get the lists of sentences and their labels.
-    X_train_sentences = df_train[:, param_sentence_field]
+    X_train_sentences = concat_text_input_fields(df_train, text_input_fields, text_norm_option)
     y_train_labels = df_train[:, param_label_field]
 
     # Load the BERT tokenizer.
@@ -379,7 +408,7 @@ def fit_bert_holdout(df_all: pd.DataFrame, split_at_row: int,
     print('Number of test sentences: {:,}\n'.format(df_test.shape[0]))
 
     # Create sentence and label lists
-    X_test_sentences = df_test[:, param_sentence_field]
+    X_test_sentences = concat_text_input_fields(df_test, text_input_fields, text_norm_option)
     y_test_labels = df_test[:, param_label_field]
     y_test_labels = le.transform(y_test_labels)
 
@@ -467,101 +496,15 @@ def fit_bert_holdout(df_all: pd.DataFrame, split_at_row: int,
     # Combine the correct labels for each batch into a single list.
     flat_true_labels = np.concatenate(true_labels, axis=0)
 
-    # Calculate the MCC
-    mcc = matthews_corrcoef(flat_true_labels, flat_predictions)
 
-    print('Total MCC: %.3f' % mcc)
+    predictions_text_labels=le.inverse_transform(flat_predictions)
+    true_text_labels=le.inverse_transform(flat_true_labels)
+    # Calculate the scores
+    algorithm_param_identifier = "sent={} batch={} epoch={}".format(param_sentence_length,
+                                                                    param_batch_size,
+                                                                    param_training_epoch)
+    cutil.save_scores(predictions_text_labels, true_text_labels, model_name, target_and_feature, algorithm_param_identifier, 3,
+                      outfolder)
 
-if __name__ == "__main__":
-    # argv-1: folder containing all settings to run, see 'input' folder
-    # argv-2: working directory
-    # argv3,4:set to False
-
-    # the program can take additional parameters to overwrite existing ones defined in setting files.
-    # for example, if you want to overwrite the embedding file, you can include this as an overwrite
-    # param in the command line, but specifying [embedding_file= ...] where 'embedding_file'
-    # must match the parameter name. Note that this will apply to ALL settings
-    overwrite_params = exp_util.parse_overwrite_params(sys.argv)
-
-    mwpd_fieldname_to_colindex_map = {
-        'ID': 0,
-        'Name': 1,
-        'Description': 2,
-        'CategoryText': 3,
-        'URL': 4,
-        'lvl1': 5,
-        'lvl2': 6,
-        'lvl3': 7,
-    }
-    ##    ID, Name, Desc, Brand, Manufacturer, URL, lvl1
-    wdc_fieldname_to_colindex_map = {
-        'ID': 0,
-        'Name': 1,
-        'Desc': 2,
-        'Brand': 3,
-        'Manufacturer': 4,
-        'URL': 5,
-        'lvl1': 6
-    }
-
-    icecat_fieldname_to_colindex_map = {
-        'ID': 0,
-        'Description.URL': 1,
-        'Brand': 2,
-        'SummaryDescription.LongSummaryDescription': 3,
-        'Title': 4,
-        'Category.CategoryID': 5,
-        'Category.Name.Value': 6
-    }
-
-    rakuten_fieldname_to_colindex_map = {
-        'Name': 0,
-        'lvl1': 1
-    }
-
-    if sys.argv[5] == 'mwpd':
-        text_field_mapping = mwpd_fieldname_to_colindex_map
-    elif sys.argv[5] == 'wdc':
-        text_field_mapping = wdc_fieldname_to_colindex_map
-    elif sys.argv[5] == 'rakuten':
-        text_field_mapping = rakuten_fieldname_to_colindex_map
-    else:
-        text_field_mapping = icecat_fieldname_to_colindex_map
-
-    setting_file = sys.argv[4]
-
-    # If there's a GPU available...
-    use_gpu = False
-    if torch.cuda.is_available():
-        device = torch.device("cuda")
-        use_gpu = True
-        print('There are %d GPU(s) available.' % torch.cuda.device_count())
-        print('We will use the GPU:', torch.cuda.get_device_name(0))
-    # If not...
-    else:
-        print('No GPU available, using the CPU instead.')
-        device = torch.device("cpu")
-
-    properties = exp_util.load_properties(setting_file)
-
-    param_sentence_length = int(properties['param_sentence_length'])
-    param_sentence_field = 1
-    param_label_field = 5
-    param_batch_size = int(properties['param_batch_size'])
-    param_training_epoch = int(properties['param_training_epoch'])
-
-    model_name = "-bert-"
-    task_name = "-mwpd-"
-    identifier = "-wiki103_lmft-"
-    outfolder = sys.argv[3]
-    train = sys.argv[1]
-    test = sys.argv[2]
-
-    # Load the dataset into a pandas dataframe.
-    df_all, train_size, test_size = exp_util.load_and_merge_train_test_data_jsonMPWD(
-        # "/home/zz/Cloud/GDrive/ziqizhang/project/mwpd/prodcls/data/swc2020/small_train.json",
-        # "/home/zz/Cloud/GDrive/ziqizhang/project/mwpd/prodcls/data/swc2020/small_train.json")
-        train,
-        test)
-    # encode labels to numbers
+    print('Completed')
 

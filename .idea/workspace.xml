@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76609b8b-8abf-4f22-90e3-2d71fca00ff7" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/code/python/src/util/exp_util.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/code/python/src/classifier/classifier_bert_.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/code/python/src/exp/run_exp_bert.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/code/python/src/classifier/classifier_bert.py" afterPath="$PROJECT_DIR$/code/python/src/classifier/classifier_bert.py" />
+      <change beforePath="$PROJECT_DIR$/code/python/src/util/exp_util.py" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,21 +17,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="classifier_bert.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/code/python/src/classifier/classifier_bert.py">
+      <file leaf-file-name="classifier_bert_.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/python/src/classifier/classifier_bert_.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="127" column="0" lean-forward="false" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+            <state relative-caret-position="302">
+              <caret line="558" column="0" lean-forward="true" selection-start-line="558" selection-start-column="0" selection-end-line="558" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="exp_util.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/python/src/util/exp_util.py">
+        <entry file="file://$PROJECT_DIR$/code/python/src/exp/exp_util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="35" column="17" lean-forward="false" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="run_exp_bert.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/python/src/exp/run_exp_bert.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="121">
+              <caret line="95" column="62" lean-forward="false" selection-start-line="95" selection-start-column="62" selection-end-line="95" selection-end-column="62" />
+              <folding>
+                <element signature="e#0#24#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="classifier_bert.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/code/python/src/classifier/classifier_bert.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="137">
+              <caret line="14" column="18" lean-forward="true" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -64,6 +90,7 @@
       <list>
         <option value="$PROJECT_DIR$/code/python/src/classifier/sandpit/BERTClassify.py" />
         <option value="$PROJECT_DIR$/code/python/src/util/exp_util.py" />
+        <option value="$PROJECT_DIR$/code/python/src/exp/run_exp_bert.py" />
         <option value="$PROJECT_DIR$/code/python/src/classifier/classifier_bert.py" />
       </list>
     </option>
@@ -139,6 +166,14 @@
               <item name="code" type="462c0819:PsiDirectoryNode" />
               <item name="python" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="exp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wop_bert" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wop_bert" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="python" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -193,7 +228,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="wop_bert" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/code/python/src/classifier/classifier_bert.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/code/python/src/classifier/classifier_bert_.py" />
       <option name="PARAMETERS" value="&quot;$USER_HOME$/Cloud/GDrive/ziqizhang/project/mwpd/prodcls/data/swc2020/train.json&quot; &quot;$USER_HOME$/Cloud/GDrive/ziqizhang/project/mwpd/prodcls/data/swc2020/test.json&quot; $USER_HOME$/Cloud/GDrive/ziqizhang/project/mwpd/prodcls/data/swc2020 $PROJECT_DIR$/input/dnn_holdout/mwpd/n/gslvl1_name.txt mwpd" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -227,6 +262,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1366" y="-2" width="1680" height="1052" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1973446" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -236,7 +272,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33984798" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33984798" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -254,13 +290,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/code/python/src/classifier/classifier_bert.py</url>
-          <line>555</line>
+          <url>file://$PROJECT_DIR$/code/python/src/classifier/classifier_bert_.py</url>
+          <line>566</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/code/python/src/classifier/classifier_bert.py</url>
-          <line>127</line>
+          <url>file://$PROJECT_DIR$/code/python/src/classifier/classifier_bert_.py</url>
+          <line>552</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
@@ -320,7 +356,7 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/code/python/src/classifier/classifier_bert.py">
+    <entry file="file://$PROJECT_DIR$/code/python/src/classifier/classifier_bert_.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1170">
           <caret line="65" column="24" lean-forward="false" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="24" />
@@ -366,16 +402,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/python/src/exp/exp_util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/python/src/classifier/classifier_bert_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="558" column="0" lean-forward="true" selection-start-line="558" selection-start-column="0" selection-end-line="558" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/python/src/exp/run_exp_bert.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="95" column="62" lean-forward="false" selection-start-line="95" selection-start-column="62" selection-end-line="95" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/python/src/classifier/classifier_bert.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="127" column="0" lean-forward="false" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+        <state relative-caret-position="137">
+          <caret line="14" column="18" lean-forward="true" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
           <folding />
         </state>
       </provider>

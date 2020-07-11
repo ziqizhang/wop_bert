@@ -18,11 +18,11 @@ label=gslvl1_name_
 output_folder=/wop_bert/output/classifier
 
 #CSV input text data columns, seperated by ','. If multiple columns are specified, content will be merged
-text_fieldnames=Name|URL
+text_fieldnames=Name
 
-param_sentence_length = 64
+param_sentence_length = 32
 param_batch_size = 32
-param_training_epoch = 2
+param_training_epoch = 10
 
 #column index of target classes
 class_fieldname=lvl1

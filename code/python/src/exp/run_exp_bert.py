@@ -72,16 +72,16 @@ if __name__ == "__main__":
 
     print("loading dataset...")
     if sys.argv[5] == "mwpd":
-        dfdf_all, train_size, test_size = exp_util. \
+        df_all, train_size, test_size = exp_util. \
             load_and_merge_train_test_data_jsonMPWD(train, test)
     elif sys.argv[5] == "rakuten":
-        dfdf_all, train_size, test_size = exp_util. \
+        df_all, train_size, test_size = exp_util. \
             load_and_merge_train_test_csvRakuten(train, test, delimiter="\t")
     elif sys.argv[5] == "icecat":
-        dfdf_all, train_size, test_size = exp_util. \
+        df_all, train_size, test_size = exp_util. \
             load_and_merge_train_test_data_jsonIceCAT(train, test)
     else:  # wdc
-        dfdf_all, train_size, test_size = exp_util. \
+        df_all, train_size, test_size = exp_util. \
             load_and_merge_train_test_data_jsonWDC(train, test)
 
 

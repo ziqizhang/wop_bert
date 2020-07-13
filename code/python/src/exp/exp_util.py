@@ -85,14 +85,14 @@ def load_and_merge_train_test_data_jsonIceCAT(train_data_file, test_data_file):
 
     row=len(train)+len(test)
     col=len(train[0])
-    matrix=numpy.ndarray(shape=(row,col), dtype=str)
+    matrix=numpy.ndarray(shape=(row,col), dtype=object)
 
     index=0
     for row in train:
-        matrix[index]=row
+        matrix[index, :]=numpy.array(row)
         index+=1
     for row in test:
-        matrix[index] = row
+        matrix[index, :] = numpy.array(row)
         index+=1
 
     return matrix,len(train), len(test)

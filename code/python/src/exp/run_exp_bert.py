@@ -83,7 +83,7 @@ if __name__ == "__main__":
     else:  # wdc
         df_all, train_size, test_size = exp_util. \
             load_and_merge_train_test_data_jsonWDC(train, test)
-
+    print("data loaded")
 
     class_fieldname = exp_util.load_setting("class_fieldname", properties, overwrite_params)
     param_label_field = text_field_mapping[class_fieldname]
@@ -133,5 +133,14 @@ bert-base-uncased
 /home/zz/Work/data/Rakuten/original
 /home/zz/Work/wop_bert/input/dnn_holdout/rakuten/n/gslvl1_name.txt
 rakuten
+bert-base-uncased
+'''
+
+'''
+"/home/zz/Work/data/IceCAT/icecat_data_train.json"
+"/home/zz/Work/data/IceCAT/icecat_data_test.json"
+/home/zz/Work/data/IceCAT
+/home/zz/Work/wop_bert/input/dnn_holdout/rakuten/n/gslvl1_name.txt
+icecat
 bert-base-uncased
 '''

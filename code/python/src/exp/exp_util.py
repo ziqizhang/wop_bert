@@ -31,11 +31,12 @@ that allows precisely splitting the merged set back into train&test
 '''
 def load_and_merge_train_test_csvRakuten(train_data_file, test_data_file, delimiter=";"):
     train = pd.read_csv(train_data_file, header=0, delimiter=delimiter, quoting=0, encoding="utf-8",
-                        ).fillna('').as_matrix()
+                        ).fillna('')
+    train=train.to_numpy()
     train.astype(str)
 
     test = pd.read_csv(test_data_file, header=0, delimiter=delimiter, quoting=0, encoding="utf-8",
-                       ).fillna('').as_matrix()
+                       ).fillna('').to_numpy()
     test.astype(str)
 
     return numpy.concatenate((train, test), axis=0), len(train), len(test)

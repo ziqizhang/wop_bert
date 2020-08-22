@@ -49,7 +49,7 @@ def flat_accuracy(preds, labels):
     return np.sum(pred_flat == labels_flat) / len(labels_flat)
 
 def concat_text_input_fields(df:pd.DataFrame, text_input_fields: list,
-                             text_norm_option: int):
+                             text_norm_option: int,url_extract=0):
     sentences=[]
     for row in df:
         text = ""
@@ -57,10 +57,11 @@ def concat_text_input_fields(df:pd.DataFrame, text_input_fields: list,
             text_col = text_input_fields[b]
             t = row[text_col]
             if t.startswith("http") and " " not in t:
-                t = nlp.url_to_words(t)
+                t = nlp.url_to_words_basic(t,url_extract)
             text += t+" "
         sentences.append(text)
     return sentences
+
 
 
 def fit_bert_holdout(df_all: pd.DataFrame, split_at_row: int,

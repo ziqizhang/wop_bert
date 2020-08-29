@@ -95,8 +95,9 @@ if __name__ == "__main__":
                                             overwrite_params))
 
     if bert_model.startswith("/"):
-        bert_model=bert_model[bert_model.rfind("/")+1:]
-    model_name = bert_model
+        model_name=bert_model[bert_model.rfind("/")+1:]
+    else:
+        model_name = bert_model
 
     target_and_feature=setting_file[setting_file.rfind("/") + 1:]
     input_text_fields = []

@@ -89,7 +89,8 @@ if __name__ == "__main__":
 
     rakuten_fieldname_to_colindex_map = {
         'Name': 0,
-        'lvl1': 1
+        'lvl1': 1,
+        'URL':2
     }
 
     if sys.argv[5] == 'mwpd':

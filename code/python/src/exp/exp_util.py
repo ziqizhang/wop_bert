@@ -97,6 +97,21 @@ def load_and_merge_train_test_data_jsonIceCAT(train_data_file, test_data_file):
 
     return matrix,len(train), len(test)
 
+def load_and_merge_train_test_data_productfakerev(train_data_file, test_data_file):
+    train = pd.read_csv(train_data_file, header=0, delimiter=",", quoting=0, encoding="utf-8",
+                     )
+    train.astype(str)
+
+    if (test_data_file is None):
+        return train, len(train), 0
+
+    test = pd.read_csv(test_data_file, header=0, delimiter=",", quoting=0, encoding="utf-8",
+                       ).fillna('').values
+    test.astype(str)
+
+    return numpy.concatenate((train, test), axis=0), len(train), len(test)
+
+
 
 def load_properties(filepath, sep='=', comment_char='#'):
     """

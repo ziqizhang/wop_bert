@@ -53,6 +53,11 @@ if __name__ == "__main__":
         'URL':2
     }
 
+    fakerev_fieldname_to_colindex_map = {
+        'Name': 2,
+        'label': 3
+    }
+
     train = sys.argv[1]
     test = sys.argv[2]
     outfolder = sys.argv[3]
@@ -63,6 +68,8 @@ if __name__ == "__main__":
         text_field_mapping = wdc_fieldname_to_colindex_map
     elif sys.argv[5] == 'rakuten':
         text_field_mapping = rakuten_fieldname_to_colindex_map
+    elif sys.argv[5] =='fakerev':
+        text_field_mapping=fakerev_fieldname_to_colindex_map
     else:
         text_field_mapping = icecat_fieldname_to_colindex_map
 
@@ -81,6 +88,9 @@ if __name__ == "__main__":
     elif sys.argv[5] == "icecat":
         df_all, train_size, test_size = exp_util. \
             load_and_merge_train_test_data_jsonIceCAT(train, test)
+    elif sys.argv[5]=="fakerev":
+        df_all, train_size, test_size = exp_util. \
+            load_and_merge_train_test_data_productfakerev(train, test)
     else:  # wdc
         df_all, train_size, test_size = exp_util. \
             load_and_merge_train_test_data_jsonWDC(train, test)
@@ -145,4 +155,15 @@ bert-base-uncased
 /home/zz/Work/wop_bert/input/dnn_holdout/rakuten/n/gslvl1_name.txt
 icecat
 bert-base-uncased
+
+
+/home/zz/Work/data/wop_productfakerev/fakeproductrev_train.csv
+/home/zz/Work/data/wop_productfakerev/fakeproductrev_test.csv
+/home/zz/Work/wop_bert
+/home/zz/Work/wop_bert/input/dnn_holdout/fakeprodrev/n/gslvl1_name.txt
+fakerev
+bert-base-uncased
 '''
+
+#/home/li1zz/wop_bert/input/dnn_holdout/fakeprodrev/n
+#/home/li1zz/data/fakeproductrev

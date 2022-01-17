@@ -2,51 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2e908d1-6a49-4398-8634-0770fb1444f2" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/wop_bert.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/wop_bert.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/exp/run_exp_bert_apply.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/testdata_iterator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classifier/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classifier/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classifier/classifier_bert.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classifier/classifier_bert.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classifier/classifier_bert_.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classifier/classifier_bert_.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classifier/classifier_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classifier/classifier_util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classifier/sandpit/BERTClassify.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classifier/sandpit/BERTClassify.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classifier/sandpit/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classifier/sandpit/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classifier/sandpit/run_language_modelling.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classifier/sandpit/run_language_modelling.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exp/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/exp/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exp/exp_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/exp/exp_util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exp/run_exp_bert.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/exp/run_exp_bert.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/data_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/data_util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/nlp.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/nlp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/icecat/n+d+b+u/gslvl1_n+d+b+u.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/icecat/n+d+b+u/gslvl1_n+d+b+u.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/icecat/n+d+b/gslvl1_n+d+b.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/icecat/n+d+b/gslvl1_n+d+b.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/icecat/n+u/gslvl1_n+u.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/icecat/n+u/gslvl1_n+u.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/icecat/n/gslvl1_name.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/icecat/n/gslvl1_name.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+d+c+u/gslvl1_n+d+c+u.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+d+c+u/gslvl1_n+d+c+u.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+d+c+u/gslvl2_n+d+c+u.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+d+c+u/gslvl2_n+d+c+u.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+d+c+u/gslvl3_n+d+c+u.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+d+c+u/gslvl3_n+d+c+u.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+d+c/gslvl1_n+d+c.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+d+c/gslvl1_n+d+c.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+d+c/gslvl2_n+d+c.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+d+c/gslvl2_n+d+c.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+d+c/gslvl3_n+d+c.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+d+c/gslvl3_n+d+c.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+u/gslvl1_n+u.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+u/gslvl1_n+u.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+u/gslvl2_n+u.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+u/gslvl2_n+u.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+u/gslvl3_n+u.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n+u/gslvl3_n+u.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n/gslvl1_name.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n/gslvl1_name.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n/gslvl2_name.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n/gslvl2_name.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n/gslvl3_name.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/mwpd/n/gslvl3_name.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/rakuten/n/gslvl1_name.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/rakuten/n/gslvl1_name.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/wdc/n+d+b+m+u/gslvl1_n+d+b+m+u.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/wdc/n+d+b+m+u/gslvl1_n+d+b+m+u.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/wdc/n+d+b+m/gslvl1_n+d+b+m.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/wdc/n+d+b+m/gslvl1_n+d+b+m.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/wdc/n+u/gslvl1_n+u.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/wdc/n+u/gslvl1_n+u.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../input/dnn_holdout/wdc/n/gslvl1_name.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../input/dnn_holdout/wdc/n/gslvl1_name.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +119,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/exp/run_exp_bert_apply.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -172,7 +131,7 @@
       <recent name="$PROJECT_DIR$/src/bert" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.run_exp_bert">
+  <component name="RunManager" selected="Python.run_exp_bert_applyonly">
     <configuration name="BERTClassify" type="PythonConfigurationType" factoryName="Python">
       <module name="python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -246,6 +205,68 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="run_exp_bert_applyonly" type="PythonConfigurationType" factoryName="Python">
+      <module name="python" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/exp" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        </ENTRIES>
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/exp/run_exp_bert_apply.py" />
+      <option name="PARAMETERS" value="apply $PROJECT_DIR$/../../input/dnn_holdout/fakeprodrev/n/gslvl1_name.txt fakerev bert-base-uncased $PROJECT_DIR$/../.. $PROJECT_DIR$/../../output $PROJECT_DIR$/../../../data/wop_productfakerev None None" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="run_exp_bert_trainonly" type="PythonConfigurationType" factoryName="Python">
+      <module name="python" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/exp" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        </ENTRIES>
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/exp/run_exp_bert_apply.py" />
+      <option name="PARAMETERS" value="train $PROJECT_DIR$/../../input/dnn_holdout/fakeprodrev/n/gslvl1_name.txt fakerev bert-base-uncased $PROJECT_DIR$/../../../data/wop_productfakerev/fakeproductrev_train_small.csv $PROJECT_DIR$/../../../data/wop_productfakerev/fakeproductrev_test_small.csv $PROJECT_DIR$/../.." />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="run_language_modelling" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -270,6 +291,8 @@
     <list>
       <item itemvalue="Python.BERTClassify" />
       <item itemvalue="Python.run_exp_bert" />
+      <item itemvalue="Python.run_exp_bert_trainonly" />
+      <item itemvalue="Python.run_exp_bert_applyonly" />
       <item itemvalue="Python.run_language_modelling" />
       <item itemvalue="Python.classifier_bert" />
     </list>
@@ -332,6 +355,21 @@
           <url>file://$PROJECT_DIR$/src/exp/run_exp_bert.py</url>
           <line>81</line>
           <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/classifier/classifier_bert_.py</url>
+          <line>641</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/classifier/classifier_bert_.py</url>
+          <line>908</line>
+          <option name="timeStamp" value="71" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/classifier/classifier_bert_.py</url>
+          <line>911</line>
+          <option name="timeStamp" value="74" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

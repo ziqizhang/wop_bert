@@ -2,7 +2,7 @@ import pandas as pd
 import numpy
 
 def get_next_batch(input_folder, batch_size, start_from_file=None, start_from_batch=None):
-    data = load_and_merge_train_test_data_productfakerev(input_folder+"/fakeproductrev_test_small.csv")
+    data = load_and_merge_train_test_data_productfakerev(input_folder+"/fakeproductrev_train.csv")
     return data, 0
 
 

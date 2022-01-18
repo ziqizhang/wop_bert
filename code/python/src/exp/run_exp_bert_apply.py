@@ -88,7 +88,7 @@ if __name__ == "__main__":
                input_data_startfromfile=None,
                input_data_startfrombatch=None
         '''
-        classifier_bert_.apply_mode(
+        classifier_bert_.apply_model(
             sys.argv[5], #classifier model, saved
             bert_model,
             sys.argv[6], #outfolder

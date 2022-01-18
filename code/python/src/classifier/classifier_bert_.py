@@ -1,6 +1,7 @@
 '''
 Colab at: https://colab.research.google.com/drive/1CfoY7d041kRhyrYq49Mtivn11SFvR4P1#scrollTo=oYsV4H8fCpZ-
 '''
+import csv
 import logging
 import pickle
 
@@ -21,7 +22,7 @@ import random
 import pandas as pd
 from sklearn.metrics import matthews_corrcoef
 import sys
-from util import nlp, testdata_iterator
+from util import nlp, amazonreview_dataiterator
 from classifier import classifier_util as cutil
 
 seed_val = 42
@@ -780,19 +781,19 @@ def fit_bert_trainonly(df_all: pd.DataFrame, split_at_row: int,  # indicate trai
         pickle.dump(le, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
-def apply_mode(folder_to_classificationmodel,
-               folder_to_bert_model: str,  # either a name identifying the pre-trained model, or path
-               outfolder: str,
-               param_label_field: int,
-               param_sentence_length: int,
-               param_batch_size: int,
-               text_norm_option: int,
-               text_input_fields: list,
-               input_data_folder: str,
-               input_data_batch_size: int,
-               input_data_startfromfile=None,
-               input_data_startfrombatch=None
-               ):
+def apply_model(folder_to_classificationmodel,
+                folder_to_bert_model: str,  # either a name identifying the pre-trained model, or path
+                outfolder: str,
+                param_label_field: int,
+                param_sentence_length: int,
+                param_batch_size: int,
+                text_norm_option: int,
+                text_input_fields: list,
+                input_data_folder: str,
+                input_data_batch_size: int,
+                input_data_startfromfile=None,
+                input_data_startfrombatch=None
+                ):
     model = torch.load(folder_to_classificationmodel + "/classifier")
     with open(folder_to_classificationmodel + '/labelencoder.pk', 'rb') as handle:
         le = pickle.load(handle)
@@ -816,11 +817,11 @@ def apply_mode(folder_to_classificationmodel,
     ##################################
 
     # Load the dataset into a pandas dataframe.
-    df_test, batch_id = testdata_iterator.get_next_batch(input_data_folder, input_data_batch_size,
-                                                          input_data_startfromfile, input_data_startfrombatch)
-    for x in range(0,1):
+
+    for df_test, batch_id, source_file in amazonreview_dataiterator.get_next_batch(input_data_folder, input_data_batch_size,
+                                                                      input_data_startfromfile, input_data_startfrombatch):
         # Report the number of sentences.
-        print('From File={}, Batch ID = {}, Number of test sentences: {:,}\n'.format(input_data_startfromfile,
+        print('From File={}, Batch ID = {}, Number of test sentences: {:,}\n'.format(source_file,
                                                                                          batch_id, df_test.shape[0]))
 
         # Create sentence and label lists
@@ -907,6 +908,16 @@ def apply_mode(folder_to_classificationmodel,
 
         predictions_text_labels = le.inverse_transform(flat_predictions)
         true_text_labels = le.inverse_transform(flat_true_labels)
-        # Calculate the scores
 
-        print('Completed')
+        #saving the output
+        outfile = outfolder+"/"+source_file.replace(" ","_")+"_"+str(batch_id)+".csv"
+        with open(outfile, 'w', newline='', encoding='utf-8') as csv_file:
+            writer = csv.writer(csv_file, delimiter=',', quoting=csv.QUOTE_ALL, quotechar='"')
+            header = ["category", "rating", "reviewText", "label", "vote", "verified", "reviewerID", "asin", "summary"]
+            writer.writerow(header)
+            for i in range(0, len(true_text_labels)):
+                row = df_test[i]
+                row[4] = true_text_labels[i]
+                writer.writerow(row)
+
+    print('Completed')

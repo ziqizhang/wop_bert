@@ -52,6 +52,7 @@ if __name__ == "__main__":
         train = sys.argv[5]
         test = sys.argv[6]
         outfolder = sys.argv[7]
+        cache=sys.argv[8]
 
         print("loading dataset...")
         if sys.argv[3]=="fakerev":
@@ -71,7 +72,8 @@ if __name__ == "__main__":
                                           model_name,
                                           target_and_feature,
                                           1,
-                                          input_text_fields)
+                                          input_text_fields,
+                                            bert_cache=cache)
 
     else:
         '''
@@ -99,8 +101,9 @@ if __name__ == "__main__":
             text_input_fields=input_text_fields,
             input_data_folder=sys.argv[7],
             input_data_batch_size=10000,
-            input_data_startfromfile=sys.argv[8],
-            input_data_startfrombatch=sys.argv[9]
+            bert_cache=sys.argv[8],
+            input_data_startfromfile=sys.argv[9],
+            input_data_startfrombatch=sys.argv[10]
             )
 
 #/home/li1zz/wop_bert/input/dnn_holdout/fakeprodrev/n

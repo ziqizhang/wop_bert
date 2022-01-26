@@ -76,7 +76,8 @@ def fit_bert_holdout(df_all: pd.DataFrame, split_at_row: int,
                      model_name: str,  # bert_uncased, or bert_customised, etc
                      target_and_feature: str,  # classification lvl or target, and text input fields
                      text_norm_option: int,
-                     text_input_fields: list):
+                     text_input_fields: list,
+                     bert_cache:str):
     # If there's a GPU available...
     use_gpu = False
     if torch.cuda.is_available():
@@ -106,7 +107,7 @@ def fit_bert_holdout(df_all: pd.DataFrame, split_at_row: int,
 
     # Load the BERT tokenizer.
     print('Loading BERT tokenizer...')
-    tokenizer = BertTokenizer.from_pretrained(bert_model, do_lower_case=True)
+    tokenizer = BertTokenizer.from_pretrained(bert_model, do_lower_case=True, cache_dir=bert_cache)
 
     max_len = 0
     for sent in X_train_sentences:
@@ -181,6 +182,7 @@ def fit_bert_holdout(df_all: pd.DataFrame, split_at_row: int,
         num_labels=len(le.classes_),  # The number of output labels.
         output_attentions=False,  # Whether the model returns attentions weights.
         output_hidden_states=False,  # Whether the model returns all hidden-states.
+        cache_dir=bert_cache
     )
 
     # Tell pytorch to run this model on the GPU.
@@ -523,7 +525,8 @@ def fit_bert_trainonly(df_all: pd.DataFrame, split_at_row: int,  # indicate trai
                        model_name: str,  # bert_uncased, or bert_customised, etc
                        target_and_feature: str,  # classification lvl or target, and text input fields
                        text_norm_option: int,
-                       text_input_fields: list):
+                       text_input_fields: list,
+                       bert_cache):
     # If there's a GPU available...
     use_gpu = False
     if torch.cuda.is_available():
@@ -553,7 +556,7 @@ def fit_bert_trainonly(df_all: pd.DataFrame, split_at_row: int,  # indicate trai
 
     # Load the BERT tokenizer.
     print('Loading BERT tokenizer...')
-    tokenizer = BertTokenizer.from_pretrained(bert_model, do_lower_case=True)
+    tokenizer = BertTokenizer.from_pretrained(bert_model, do_lower_case=True, cache_dir=bert_cache)
 
     max_len = 0
     for sent in X_train_sentences:
@@ -621,6 +624,7 @@ def fit_bert_trainonly(df_all: pd.DataFrame, split_at_row: int,  # indicate trai
         num_labels=len(le.classes_),  # The number of output labels.
         output_attentions=False,  # Whether the model returns attentions weights.
         output_hidden_states=False,  # Whether the model returns all hidden-states.
+        cache_dir=bert_cache
     )
 
     # Tell pytorch to run this model on the GPU.
@@ -791,6 +795,7 @@ def apply_model(folder_to_classificationmodel,
                 text_input_fields: list,
                 input_data_folder: str,
                 input_data_batch_size: int,
+                bert_cache:str,
                 input_data_startfromfile=None,
                 input_data_startfrombatch=None
                 ):
@@ -799,7 +804,7 @@ def apply_model(folder_to_classificationmodel,
         le = pickle.load(handle)
     # Load the BERT tokenizer.
     print('Loading BERT tokenizer...')
-    tokenizer = BertTokenizer.from_pretrained(folder_to_bert_model, do_lower_case=True)
+    tokenizer = BertTokenizer.from_pretrained(folder_to_bert_model, do_lower_case=True, cache_dir=bert_cache)
     print('Done, checking CUDA...')
     use_gpu = False
     if torch.cuda.is_available():

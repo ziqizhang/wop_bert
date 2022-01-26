@@ -1,4 +1,7 @@
+import sys
 
 from transformers import BertTokenizer
-tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
-print("success")
+
+if __name__ == "__main__":
+    tokenizer = BertTokenizer.from_pretrained(sys.argv[1], do_lower_case=True)
+    print("success")

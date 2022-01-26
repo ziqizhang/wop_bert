@@ -52,7 +52,9 @@ if __name__ == "__main__":
         train = sys.argv[5]
         test = sys.argv[6]
         outfolder = sys.argv[7]
-        cache=sys.argv[8]
+        cache=None
+        if len(sys.argv)>8:
+            cache=sys.argv[8]
 
         print("loading dataset...")
         if sys.argv[3]=="fakerev":
@@ -90,6 +92,9 @@ if __name__ == "__main__":
                input_data_startfromfile=None,
                input_data_startfrombatch=None
         '''
+        cache = None
+        if len(sys.argv) > 8:
+            cache = sys.argv[8]
         classifier_bert_.apply_model(
             sys.argv[5], #classifier model, saved
             bert_model,
@@ -101,7 +106,7 @@ if __name__ == "__main__":
             text_input_fields=input_text_fields,
             input_data_folder=sys.argv[7],
             input_data_batch_size=10000,
-            bert_cache=sys.argv[8],
+            bert_cache=cache,
             input_data_startfromfile=sys.argv[9],
             input_data_startfrombatch=sys.argv[10]
             )

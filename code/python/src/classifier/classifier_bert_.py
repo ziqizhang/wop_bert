@@ -77,7 +77,7 @@ def fit_bert_holdout(df_all: pd.DataFrame, split_at_row: int,
                      target_and_feature: str,  # classification lvl or target, and text input fields
                      text_norm_option: int,
                      text_input_fields: list,
-                     bert_cache:str):
+                     bert_cache=None):
     # If there's a GPU available...
     use_gpu = False
     if torch.cuda.is_available():
@@ -526,7 +526,7 @@ def fit_bert_trainonly(df_all: pd.DataFrame, split_at_row: int,  # indicate trai
                        target_and_feature: str,  # classification lvl or target, and text input fields
                        text_norm_option: int,
                        text_input_fields: list,
-                       bert_cache):
+                       bert_cache=None):
     # If there's a GPU available...
     use_gpu = False
     if torch.cuda.is_available():
@@ -795,7 +795,7 @@ def apply_model(folder_to_classificationmodel,
                 text_input_fields: list,
                 input_data_folder: str,
                 input_data_batch_size: int,
-                bert_cache:str,
+                bert_cache=None,
                 input_data_startfromfile=None,
                 input_data_startfrombatch=None
                 ):

@@ -1,3 +1,6 @@
+import datetime
+import textwrap
+
 import pandas as pd
 import numpy, os, gzip, json
 
@@ -17,7 +20,7 @@ def get_next_batch(input_folder, batch_size, start_from_file=None, start_from_ba
             else:
                 continue
 
-        print("Current processing file {} ".format(f))
+        print("Current processing file {} time={} ".format(f, datetime.datetime.now()))
         #now work out batch
         path = os.path.join(input_folder, f)
         if start_from_batch is None or start_from_batch=='None':
@@ -41,6 +44,7 @@ def get_next_batch(input_folder, batch_size, start_from_file=None, start_from_ba
             text = ''
             if 'reviewText' in j.keys():
                 text = j['reviewText']
+                text=textwrap.shorten(text, width=3000)
             vote = 0
             if 'vote' in j.keys():
                 vote = j['vote']
@@ -94,10 +98,12 @@ def load_and_merge_train_test_data_productfakerev(test_data_file):
     return test
 
 if __name__ == "__main__":
-    input_folder="/home/zz/Work/data/amazon/all"
-    batchsize=10000
+    input_folder="/home/zz/Work/data/amazon/all/part"
+    batchsize=5000
     start_from_file=None
     start_from_batch=None
     #category, rating, reviewText, label, vote, verified, reviewerID, asin, summary
-    for batch, id in get_next_batch(input_folder, batchsize, start_from_file, start_from_batch):
+    print(datetime.datetime.now())
+    for batch, id, source in get_next_batch(input_folder, batchsize, start_from_file, start_from_batch):
         print("{}, id={}, cat={} prod={}".format(len(batch), id, batch[0][0], batch[0][7]))
+    print(datetime.datetime.now())

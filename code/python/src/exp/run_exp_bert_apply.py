@@ -95,6 +95,8 @@ if __name__ == "__main__":
         cache = None
         if len(sys.argv) > 8:
             cache = sys.argv[8]
+            if cache.lower()=="none":
+                cache=None
         classifier_bert_.apply_model(
             sys.argv[5], #classifier model, saved
             bert_model,

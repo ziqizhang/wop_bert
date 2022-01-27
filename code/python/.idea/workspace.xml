@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b2e908d1-6a49-4398-8634-0770fb1444f2" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classifier/classifier_bert_.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classifier/classifier_bert_.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/exp/run_exp_bert_apply.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/exp/run_exp_bert_apply.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exp/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/exp/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +129,7 @@
       <recent name="$PROJECT_DIR$/src/bert" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.run_exp_bert_trainonly">
+  <component name="RunManager" selected="Python.run_exp_bert_applyonly">
     <configuration name="BERTClassify" type="PythonConfigurationType" factoryName="Python">
       <module name="python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -249,7 +247,7 @@
         </ENTRIES>
       </EXTENSION>
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/exp/run_exp_bert_apply.py" />
-      <option name="PARAMETERS" value="apply $PROJECT_DIR$/../../input/dnn_holdout/fakeprodrev/n/gslvl1_name.txt fakerev bert-base-uncased $PROJECT_DIR$/../.. $PROJECT_DIR$/../../output $PROJECT_DIR$/../../../data/amazon/small None None" />
+      <option name="PARAMETERS" value="apply $PROJECT_DIR$/../../input/dnn_holdout/fakeprodrev/n/gslvl1_name.txt fakerev bert-base-uncased $PROJECT_DIR$/../.. $PROJECT_DIR$/../../output $PROJECT_DIR$/../../../data/amazon/small None None None" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -436,6 +434,11 @@
           <url>file://$PROJECT_DIR$/src/exp/test.py</url>
           <line>7</line>
           <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/exp/run_exp_bert_apply.py</url>
+          <line>95</line>
+          <option name="timeStamp" value="77" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

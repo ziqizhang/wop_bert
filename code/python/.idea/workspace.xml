@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b2e908d1-6a49-4398-8634-0770fb1444f2" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exp/run_exp_bert_apply.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/exp/run_exp_bert_apply.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classifier/classifier_bert_.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classifier/classifier_bert_.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,7 +247,7 @@
         </ENTRIES>
       </EXTENSION>
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/exp/run_exp_bert_apply.py" />
-      <option name="PARAMETERS" value="apply $PROJECT_DIR$/../../input/dnn_holdout/fakeprodrev/n/gslvl1_name.txt fakerev bert-base-uncased $PROJECT_DIR$/../.. $PROJECT_DIR$/../../output $PROJECT_DIR$/../../../data/amazon/small None None None" />
+      <option name="PARAMETERS" value="apply $PROJECT_DIR$/../../input/dnn_holdout/fakeprodrev/n/gslvl1_name.txt fakerev bert-base-uncased $PROJECT_DIR$/../../output_train $PROJECT_DIR$/../../output_apply $PROJECT_DIR$/../../../data/amazon/small None None None" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -412,33 +412,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/classifier/classifier_bert_.py</url>
-          <line>646</line>
+          <line>651</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/classifier/classifier_bert_.py</url>
-          <line>914</line>
-          <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/classifier/classifier_bert_.py</url>
-          <line>927</line>
+          <line>932</line>
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/exp/test.py</url>
-          <line>9</line>
-          <option name="timeStamp" value="75" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/exp/test.py</url>
-          <line>7</line>
-          <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/exp/run_exp_bert_apply.py</url>
-          <line>95</line>
-          <option name="timeStamp" value="77" />
+          <url>file://$PROJECT_DIR$/src/classifier/classifier_bert_.py</url>
+          <line>923</line>
+          <option name="timeStamp" value="78" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

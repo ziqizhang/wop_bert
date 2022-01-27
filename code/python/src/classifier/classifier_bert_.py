@@ -2,10 +2,15 @@
 Colab at: https://colab.research.google.com/drive/1CfoY7d041kRhyrYq49Mtivn11SFvR4P1#scrollTo=oYsV4H8fCpZ-
 '''
 import csv
-import logging
+import logging,sys
 import pickle
 
-logging.basicConfig(level=logging.ERROR)
+logging.basicConfig(stream=sys.stdout,
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    level=logging.INFO,
+                    datefmt='%Y-%m-%d %H:%M:%S')
+log = logging.getLogger("classifier")
+
 
 from exp import exp_util
 from transformers import BertTokenizer
@@ -828,6 +833,8 @@ def apply_model(folder_to_classificationmodel,
         # Report the number of sentences.
         print('From File={}, Batch ID = {}, Number of test sentences: {:,}\n'.format(source_file,
                                                                                          batch_id, df_test.shape[0]))
+        log.info('From File={}, Batch ID = {}, Number of test sentences: {:,}\n'.format(source_file,
+                                                                                         batch_id, df_test.shape[0]))
 
         # Create sentence and label lists
         X_test_sentences = concat_text_input_fields(df_test, text_input_fields, text_norm_option)
@@ -867,6 +874,7 @@ def apply_model(folder_to_classificationmodel,
 
         # Prediction on test set
         print('Predicting labels for {:,} test sentences...'.format(len(input_ids)))
+        log.info('Predicting labels for {:,} test sentences...'.format(len(input_ids)))
         # Put model in evaluation mode
         model.eval()
 
@@ -899,6 +907,7 @@ def apply_model(folder_to_classificationmodel,
             true_labels.append(label_ids)
 
         print('    DONE.')
+        log.info('    DONE.')
 
         ################################
         #          Output              #
@@ -920,9 +929,10 @@ def apply_model(folder_to_classificationmodel,
             writer = csv.writer(csv_file, delimiter=',', quoting=csv.QUOTE_ALL, quotechar='"')
             header = ["category", "rating", "reviewText", "label", "vote", "verified", "reviewerID", "asin", "summary"]
             writer.writerow(header)
-            for i in range(0, len(true_text_labels)):
+            for i in range(0, len(predictions_text_labels)):
                 row = df_test[i]
-                row[4] = true_text_labels[i]
+                row[4] = predictions_text_labels[i]
                 writer.writerow(row)
 
     print('Completed')
+

@@ -78,6 +78,8 @@ if __name__ == "__main__":
                                             bert_cache=cache)
 
     else:
+        print(sys.argv)
+        print(len(sys.argv))
         '''
         folder_to_classificationmodel,
                folder_to_bert_model: str,  # either a name identifying the pre-trained model, or path

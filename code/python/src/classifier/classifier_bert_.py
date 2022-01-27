@@ -7,7 +7,7 @@ import pickle
 
 logging.basicConfig(stream=sys.stdout,
                     format='%(asctime)s %(levelname)-8s %(message)s',
-                    level=logging.INFO,
+                    level=logging.ERROR,
                     datefmt='%Y-%m-%d %H:%M:%S')
 log = logging.getLogger("classifier")
 
@@ -833,7 +833,7 @@ def apply_model(folder_to_classificationmodel,
         # Report the number of sentences.
         print('From File={}, Batch ID = {}, Number of test sentences: {:,}\n'.format(source_file,
                                                                                          batch_id, df_test.shape[0]))
-        log.info('From File={}, Batch ID = {}, Number of test sentences: {:,}\n'.format(source_file,
+        log.error('From File={}, Batch ID = {}, Number of test sentences: {:,}\n'.format(source_file,
                                                                                          batch_id, df_test.shape[0]))
 
         # Create sentence and label lists
@@ -874,7 +874,7 @@ def apply_model(folder_to_classificationmodel,
 
         # Prediction on test set
         print('Predicting labels for {:,} test sentences...'.format(len(input_ids)))
-        log.info('Predicting labels for {:,} test sentences...'.format(len(input_ids)))
+        log.error('Predicting labels for {:,} test sentences...'.format(len(input_ids)))
         # Put model in evaluation mode
         model.eval()
 
@@ -907,7 +907,7 @@ def apply_model(folder_to_classificationmodel,
             true_labels.append(label_ids)
 
         print('    DONE.')
-        log.info('    DONE.')
+        log.error('    DONE.')
 
         ################################
         #          Output              #

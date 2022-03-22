@@ -140,6 +140,7 @@ def fit_bert_holdout(df_all: pd.DataFrame, split_at_row: int,
             pad_to_max_length=True,
             return_attention_mask=True,  # Construct attn. masks.
             return_tensors='pt',  # Return pytorch tensors.
+            truncation=True
         )
 
         input_ids.append(encoded_dict['input_ids'])

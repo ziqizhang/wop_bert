@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="76609b8b-8abf-4f22-90e3-2d71fca00ff7" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/code/python/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/python/src/classifier/classifier_bert_.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/python/src/classifier/classifier_bert_.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/python/src/exp/run_exp_bert.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/python/src/exp/run_exp_bert.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,8 +212,18 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        </ENTRIES>
+      </EXTENSION>
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/code/python/src/exp/run_exp_bert.py" />
-      <option name="PARAMETERS" value="&quot;$PROJECT_DIR$/../data/Rakuten/original/rdc-catalog-gold.tsv&quot; &quot;$PROJECT_DIR$/../data/Rakuten/original/rdc-catalog-gold.tsv&quot; $PROJECT_DIR$/../data/Rakuten/original $PROJECT_DIR$/input/dnn_holdout/rakuten/n/gslvl1_name.txt rakuten bert-base-uncased" />
+      <option name="PARAMETERS" value="$PROJECT_DIR$/../data/wop_productfakerev/fakeproductrev_train_small.csv $PROJECT_DIR$/../data/wop_productfakerev/fakeproductrev_test_small.csv $PROJECT_DIR$ $PROJECT_DIR$/input/dnn_holdout/fakeprodrev/n/gslvl1_name.txt fakerev bert-base-uncased" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -300,23 +310,13 @@
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/code/python/src/classifier/classifier_util.py</url>
-          <line>50</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/code/python/src/classifier/classifier_bert_.py</url>
-          <line>277</line>
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/code/python/src/classifier/classifier_bert_.py</url>
-          <line>115</line>
+          <line>118</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/code/python/src/classifier/classifier_bert_.py</url>
-          <line>108</line>
+          <line>111</line>
           <option name="timeStamp" value="61" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -326,18 +326,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/code/python/src/exp/run_exp_bert.py</url>
-          <line>64</line>
-          <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/code/python/src/exp/run_exp_bert.py</url>
           <line>88</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/code/python/src/exp/run_exp_bert.py</url>
-          <line>105</line>
-          <option name="timeStamp" value="66" />
+          <url>file://$PROJECT_DIR$/code/python/src/classifier/classifier_bert_.py</url>
+          <line>524</line>
+          <option name="timeStamp" value="68" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

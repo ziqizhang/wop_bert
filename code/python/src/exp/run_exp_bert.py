@@ -121,7 +121,8 @@ if __name__ == "__main__":
                                       param_label_field,
                                       param_sent_length,
                                       param_batch_size,
-                                      param_epoch,
+                                      #param_epoch, #reset this
+                                      1,
                                       bert_model,
                                       outfolder,
                                       model_name,

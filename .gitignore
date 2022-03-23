@@ -2,3 +2,4 @@
 *.pk
 classifier
 *.yml
+*.csv

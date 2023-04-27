@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="76609b8b-8abf-4f22-90e3-2d71fca00ff7" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/python/src/classifier/classifier_bert_.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/python/src/classifier/classifier_bert_.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/python/src/exp/run_exp_bert.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/python/src/exp/run_exp_bert.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,10 +154,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../wdc-lspc-v2" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/zz/Work/wop_bert&quot;
+  }
+}</component>
   <component name="RunManager" selected="Python.run_exp_bert">
     <configuration name="BERTClassify" type="PythonConfigurationType" factoryName="Python">
       <module name="wop_bert" />

@@ -58,6 +58,13 @@ if __name__ == "__main__":
         'label': 3
     }
 
+    wdctablecorpus_fieldname_to_colindex_map = {
+        'Name': 2,
+        'label': 1,
+        'description':3,
+        'domain':4
+    }
+
     train = sys.argv[1]
     test = sys.argv[2]
     outfolder = sys.argv[3]
@@ -70,6 +77,8 @@ if __name__ == "__main__":
         text_field_mapping = rakuten_fieldname_to_colindex_map
     elif sys.argv[5] =='fakerev':
         text_field_mapping=fakerev_fieldname_to_colindex_map
+    elif sys.argv[5] =='wdctable':
+        text_field_mapping=wdctablecorpus_fieldname_to_colindex_map
     else:
         text_field_mapping = icecat_fieldname_to_colindex_map
 
@@ -91,6 +100,9 @@ if __name__ == "__main__":
     elif sys.argv[5]=="fakerev":
         df_all, train_size, test_size = exp_util. \
             load_and_merge_train_test_data_productfakerev(train, test)
+    elif sys.argv[5]=="wdctable":
+        df_all, train_size, test_size = exp_util. \
+            load_and_merge_train_test_data_wdctablecorpus(train, test)
     else:  # wdc
         df_all, train_size, test_size = exp_util. \
             load_and_merge_train_test_data_jsonWDC(train, test)

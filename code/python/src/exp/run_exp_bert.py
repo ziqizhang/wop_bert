@@ -59,10 +59,10 @@ if __name__ == "__main__":
     }
 
     wdctablecorpus_fieldname_to_colindex_map = {
-        'Name': 2,
-        'label': 1,
+        'name_t': 2,
+        'schemaorg_class': 1,
         'description':3,
-        'domain':4
+        'page_domain':4
     }
 
     train = sys.argv[1]

@@ -520,40 +520,40 @@ def fit_bert_holdout(df_all: pd.DataFrame, split_at_row: int,
                       algorithm_param_identifier, 3,
                       outfolder)
 
-    print("Plotting confusiong matrix...")
-    cf_matrix = confusion_matrix(flat_true_labels,flat_predictions)
+    #print("Plotting confusiong matrix...")
+    #cf_matrix = confusion_matrix(flat_true_labels,flat_predictions)
     #import seaborn as sns
 
-    ax = sns.heatmap(cf_matrix, annot=True, cmap='Blues')
-    ax.set_title('Confusion Matrix with labels\n\n')
-    ax.set_xlabel('\nPredicted Values')
-    ax.set_ylabel('Actual Values ')
+    #ax = sns.heatmap(cf_matrix, annot=True, cmap='Blues')
+    #ax.set_title('Confusion Matrix with labels\n\n')
+    #ax.set_xlabel('\nPredicted Values')
+    #ax.set_ylabel('Actual Values ')
 
     ## Ticket labels - List must be in alphabetical order
-    ax.xaxis.set_ticklabels(['Fake', 'Real'])
-    ax.yaxis.set_ticklabels(['Fake', 'Real'])
+    #ax.xaxis.set_ticklabels(['Fake', 'Real'])
+    #ax.yaxis.set_ticklabels(['Fake', 'Real'])
 
     ## Display the visualization of the Confusion Matrix.
-    plt.savefig(outfolder+"/confusion_matrix.png", format='png', dpi=300)
-    plt.clf()
+    #plt.savefig(outfolder+"/confusion_matrix.png", format='png', dpi=300)
+    #plt.clf()
 
-    print("Plotting ROC curve 1...")
-    flat_predictions = np.concatenate(predictions, axis=0)
+    #print("Plotting ROC curve 1...")
+    #flat_predictions = np.concatenate(predictions, axis=0)
     # For each sample, pick the label (0 or 1) with the higher score.
     ##flat_predictions = np.max(flat_predictions, axis=1).flatten()
-    flat_predictions = np.max(flat_predictions, axis=1).flatten()
-    fpr, tpr, _ = roc_curve(flat_true_labels, flat_predictions)
-    roc_auc = auc(fpr, tpr)
-    roc_curve_plot(fpr, tpr, roc_auc, outfolder+"/roc_curve_prob.png")
+    #flat_predictions = np.max(flat_predictions, axis=1).flatten()
+    #fpr, tpr, _ = roc_curve(flat_true_labels, flat_predictions)
+    #roc_auc = auc(fpr, tpr)
+    #roc_curve_plot(fpr, tpr, roc_auc, outfolder+"/roc_curve_prob.png")
 
-    print("Plotting ROC curve 2...")
-    flat_predictions = np.concatenate(predictions, axis=0)
+    #print("Plotting ROC curve 2...")
+    #flat_predictions = np.concatenate(predictions, axis=0)
     # For each sample, pick the label (0 or 1) with the higher score.
     ##flat_predictions = np.max(flat_predictions, axis=1).flatten()
-    flat_predictions = np.argmax(flat_predictions, axis=1).flatten()
-    fpr, tpr, _ = roc_curve(flat_true_labels, flat_predictions)
-    roc_auc = auc(fpr, tpr)
-    roc_curve_plot(fpr, tpr, roc_auc, outfolder + "/roc_curve_binary.png")
+    #flat_predictions = np.argmax(flat_predictions, axis=1).flatten()
+    #fpr, tpr, _ = roc_curve(flat_true_labels, flat_predictions)
+    #roc_auc = auc(fpr, tpr)
+    #roc_curve_plot(fpr, tpr, roc_auc, outfolder + "/roc_curve_binary.png")
 
     print('Completed')
 
